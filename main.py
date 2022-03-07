@@ -20,4 +20,4 @@ while True:
         imagefile = imagefile[:-1]
         if imagefile.endswith(".jpg"):
             set_wallpaper(imagefile)
-            time.sleep(45)
+            time.sleep(3)
