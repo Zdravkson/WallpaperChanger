@@ -1,23 +1,33 @@
+#!/bin/env python3
 import os
 import subprocess
 import time
 
+WALLPAPER_DIRECTORY = "/home/jovan/Documents/PythonProjects/WallpaperChanger/CarImages"
+SLEEP_TIME = 5
+COMMAND = "gsettings set org.gnome.desktop.background picture-uri file:"
+
+
 def set_wallpaper(imagefilename):
-    path = os.getcwd() + "/" + imagefilename
-    command = "gsettings set org.gnome.desktop.background picture-uri file:" + path
+    path = imagefilename
+    command = COMMAND + path
+    print(command)
     os.system(command)
 
 
-os.chdir("/home/jovan/Documents/PythonProjects/WallpaperChanger/CarImages")
+def get_images():
+    for root, _, files in os.walk(WALLPAPER_DIRECTORY):
+        return [
+            os.path.join(root, filename)
+            for filename in files
+            if filename.endswith(".jpg")
+        ]
 
-list_command = "ls > filenames.txt"
-subprocess.call(list_command, shell = True)
-filenames = open("filenames.txt", "r")
-filelist = filenames.readlines()
 
-while True:
-    for imagefile in filelist:
-        imagefile = imagefile[:-1]
-        if imagefile.endswith(".jpg"):
-            set_wallpaper(imagefile)
-            time.sleep(3)
+if __name__ == "__main__":
+    images = get_images()
+
+    while True:
+        for image in images:
+            set_wallpaper(image)
+            time.sleep(SLEEP_TIME)
