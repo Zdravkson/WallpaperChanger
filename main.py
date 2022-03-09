@@ -4,7 +4,7 @@ import subprocess
 import time
 
 WALLPAPER_DIRECTORY = "/home/jovan/Documents/PythonProjects/WallpaperChanger/CarImages"
-SLEEP_TIME = 5
+SLEEP_TIME = 10
 COMMAND = "gsettings set org.gnome.desktop.background picture-uri file:"
 
 
